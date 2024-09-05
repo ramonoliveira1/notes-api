@@ -11,5 +11,8 @@
             "email": "112136464+ramonoliveira1@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-pdo": "*",
+      "ext-json": "*"
+    }
 }

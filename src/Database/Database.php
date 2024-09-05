@@ -23,5 +23,6 @@ class Database
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
             exit;
         }
+        return $this->conn;
     }
 }
