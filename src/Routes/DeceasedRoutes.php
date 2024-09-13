@@ -5,9 +5,14 @@ use App\Controllers\DeceasedController;
 $deceasedController = new DeceasedController();
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
+$id = $_GET['id'] ?? null;
 
 switch ($requestMethod) {
     case 'GET':
+        if ($id) {
+            echo json_encode($deceasedController->getDeceasedById($id));
+            break;
+        }
         echo json_encode($deceasedController->getDeceaseds());
         break;
     case 'POST':

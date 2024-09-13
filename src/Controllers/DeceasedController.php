@@ -19,8 +19,15 @@ class DeceasedController
 
     public function getDeceaseds()
     {
-        $result = $this->deceased->read();
+        $result = $this->deceased->readAll();
         return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDeceasedById($id)
+    {
+        $deceased = $this->deceased->readById($id);
+        $notes = (new NoteController())->getNotesByDeceased($id);
+        return ['deceased' => $deceased->fetch(PDO::FETCH_ASSOC), 'notes' => $notes];
     }
 
     public function createDeceased($data)

@@ -5,9 +5,14 @@ use App\Controllers\NoteController;
 $noteController = new NoteController();
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
+$id = $_GET['id'] ?? null;
 
 switch ($requestMethod) {
     case 'GET':
+        if ($id) {
+            echo json_encode($noteController->getNoteById($id));
+            break;
+        }
         echo json_encode($noteController->getNotes());
         break;
     case 'POST':

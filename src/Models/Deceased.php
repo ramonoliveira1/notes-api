@@ -17,10 +17,19 @@ class Deceased
         $this->conn = $db;
     }
 
-    public function read()
+    public function readAll()
     {
         $query = 'SELECT * FROM ' . $this->table;
         $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function readById($id)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id = :id';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt;
     }

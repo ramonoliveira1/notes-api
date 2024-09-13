@@ -30,10 +30,28 @@ class Note
         return $stmt->execute();
     }
 
-    public function read()
+    public function readAll()
     {
         $query = "SELECT * FROM $this->table";
         $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function readById($id)
+    {
+        $query = "SELECT * FROM $this->table WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function readByDeceased($deceased_id)
+    {
+        $query = "SELECT * FROM $this->table WHERE deceased_id = :deceased_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':deceased_id', $deceased_id);
         $stmt->execute();
         return $stmt;
     }

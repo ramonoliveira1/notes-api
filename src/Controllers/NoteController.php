@@ -32,8 +32,14 @@ class NoteController
 
     public function getNotes()
     {
-        $result = $this->note->read();
+        $result = $this->note->readAll();
         return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getNoteById($id)
+    {
+        $result = $this->note->readById($id);
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 
     public function deleteNote($data)
@@ -43,5 +49,11 @@ class NoteController
             return ['message' => 'Note deleted'];
         }
         return ['message' => 'Note not deleted'];
+    }
+
+    public function getNotesByDeceased($id)
+    {
+        $result = $this->note->readByDeceased($id);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 }
