@@ -19,7 +19,7 @@ class Deceased
 
     public function readAll()
     {
-        $query = 'SELECT * FROM ' . $this->table;
+        $query = 'SELECT * FROM ' . $this->table . ' ORDER BY id DESC LIMIT 30';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

@@ -8,10 +8,10 @@ use PDOException;
 class Database
 {
     private $host = 'localhost';
-    private $db = 'passing_notes';
+    private $db = 'u616491472_parquedasflore';
     private $port = 3306;
-    private $user = 'root';
-    private $pass = '';
+    private $user = 'u616491472_ti';
+    private $pass = 'Holding200824@';
     private $conn;
 
     public function connect()

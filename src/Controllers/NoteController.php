@@ -53,7 +53,11 @@ class NoteController
 
     public function getNotesByDeceased($id)
     {
-        $result = $this->note->readByDeceased($id);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $result = $this->note->readByDeceased($id);
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
+            return ['message' => 'Error: ' . $e->getMessage()];
+        }
     }
 }

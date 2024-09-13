@@ -10,11 +10,14 @@ class DeceasedController
 {
     private $db;
     private $deceased;
+    
+    private $noteController;
 
     public function __construct()
     {
         $this->db = (new Database())->connect();
         $this->deceased = new Deceased($this->db);
+        $this->noteController = new NoteController();
     }
 
     public function getDeceaseds()
@@ -26,8 +29,9 @@ class DeceasedController
     public function getDeceasedById($id)
     {
         $deceased = $this->deceased->readById($id);
-        $notes = (new NoteController())->getNotesByDeceased($id);
-        return ['deceased' => $deceased->fetch(PDO::FETCH_ASSOC), 'notes' => $notes];
+        $deceased = $deceased->fetch(PDO::FETCH_ASSOC);
+        $deceased['notes'] = $this->noteController->getNotesByDeceased($id);
+        return $deceased;
     }
 
     public function createDeceased($data)
